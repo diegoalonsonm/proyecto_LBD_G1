@@ -56,11 +56,12 @@ CREATE TABLE FIDE_NACIONALIDAD_TB (
     Descripcion VARCHAR2(50) NOT NULL
 );
 
+
 CREATE TABLE FIDE_ROLES_TB (
     id_rol INT PRIMARY KEY,
     id_estado INT NOT NULL,
     nombre_rol VARCHAR2(50) NOT NULL,
-    descripciÃ³n VARCHAR2(500) NOT NULL,
+    descripcion VARCHAR2(500) NOT NULL,
     CONSTRAINT fk_roles_estado FOREIGN KEY (id_estado) 
     REFERENCES FIDE_ESTADOS_TB(id_estado)
 );
@@ -93,7 +94,7 @@ CREATE TABLE FIDE_USUARIOS_TB (
     cedula VARCHAR2(255) NOT NULL,
     telefono VARCHAR2(20) NOT NULL,
     correo VARCHAR2(100) NOT NULL,
-    contraseÃ±a VARCHAR2(100) NOT NULL,
+    contrasena VARCHAR2(100) NOT NULL,
     fecha_nacimiento DATE NOT NULL,
     CONSTRAINT fk_usuarios_rol FOREIGN KEY (id_rol) 
     REFERENCES FIDE_ROLES_TB(id_rol),
@@ -306,3 +307,86 @@ CREATE TABLE FIDE_LIMPIEZA_HABITACIONES_TB (
     CONSTRAINT fk_limpieza_estado FOREIGN KEY (id_estado) 
     REFERENCES FIDE_ESTADOS_TB(id_estado)
 );
+
+
+--creacion de paquete de usuarios y body
+
+
+create sequence seq_id_usuario
+start with 1
+increment by 1
+nocache
+nocycle;
+
+create or replace package usuarios_pkg as
+
+    function crear_usuario (
+        p_nombre varchar2,
+        p_apellidos varchar2,
+        p_cedula varchar2,
+        p_telefono varchar2,
+        p_correo varchar2,
+        p_contrasena varchar2,
+        p_fecha_nacimiento date,
+        p_id_rol int,
+        p_id_nacionalidad int,
+        p_id_direccion int
+    ) return varchar2;
+
+end usuarios_pkg;
+/
+
+create or replace package body usuarios_pkg as
+
+function crear_usuario(
+    p_nombre varchar2,
+    p_apellidos varchar2,
+    p_cedula varchar2,
+    p_telefono varchar2,
+    p_correo varchar2,
+    p_contrasena varchar2,
+    p_fecha_nacimiento date,
+    p_id_rol int,
+    p_id_nacionalidad int,
+    p_id_direccion int
+) return varchar2 is
+begin
+    insert into fide_usuarios_tb (id_usuario, nombre, apellidos, cedula, telefono, correo, contrasena, fecha_nacimiento, id_rol, id_nacionalidad, id_direccion, id_estado)
+    values (seq_id_usuario.nextval, p_nombre, p_apellidos, p_cedula, p_telefono, p_correo, p_contrasena, p_fecha_nacimiento, p_id_rol, p_id_nacionalidad, p_id_direccion, 1);
+
+    return 'usuario creado exitosamente';
+exception
+    when dup_val_on_index then
+        return 'error: el correo ya existe';
+    when others then
+        return 'error al crear el usuario: ' || sqlerrm;
+end;
+
+end usuarios_pkg;
+/
+
+select object_name, object_type
+from all_objects
+where object_name = 'USUARIOS_PKG';
+
+set serveroutput on;
+declare
+    v_resultado varchar2(400);
+begin
+    v_resultado := usuarios_pkg.crear_usuario(
+        p_nombre => 'richie',
+        p_apellidos => 'pérez',
+        p_cedula => '123456789',
+        p_telefono => '888-1234',
+        p_correo => 'juan.perez@ejemplo.com',
+        p_contrasena => 'contraseña123',
+        p_fecha_nacimiento => to_date('1990-01-01', 'yyyy-mm-dd'),
+        p_id_rol => 1,
+        p_id_nacionalidad => 1,
+        p_id_direccion => 1
+    );
+    dbms_output.put_line(v_resultado);
+end;
+
+
+
