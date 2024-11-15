@@ -2,12 +2,24 @@ CREATE TABLE FIDE_ESTADOS_TB (
     id_estado INT PRIMARY KEY,
     nombre_estado VARCHAR2(100) NOT NULL,
     descripcion VARCHAR2(1000) NOT NULL,
-    notas VARCHAR2(1000)
+    notas VARCHAR2(1000),
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
 
 CREATE TABLE FIDE_PAIS_TB (
     id_pais INT PRIMARY KEY,
-    nombre_pais VARCHAR2(50) NOT NULL
+    nombre_pais VARCHAR2(50) NOT NULL,
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
 
 CREATE TABLE FIDE_PROVINCIA_TB (
@@ -15,7 +27,13 @@ CREATE TABLE FIDE_PROVINCIA_TB (
     id_pais INT NOT NULL,
     nombre_provincia VARCHAR2(50) NOT NULL,
     CONSTRAINT fk_provincia_pais FOREIGN KEY (id_pais) 
-    REFERENCES FIDE_PAIS_TB(id_pais)
+    REFERENCES FIDE_PAIS_TB(id_pais),
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
 
 CREATE TABLE FIDE_CANTON_TB (
@@ -23,7 +41,13 @@ CREATE TABLE FIDE_CANTON_TB (
     id_provincia INT NOT NULL,
     nombre_canton VARCHAR2(100) NOT NULL,
     CONSTRAINT fk_canton_provincia FOREIGN KEY (id_provincia) 
-    REFERENCES FIDE_PROVINCIA_TB(id_provincia)
+    REFERENCES FIDE_PROVINCIA_TB(id_provincia),
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
 
 CREATE TABLE FIDE_DISTRITO_TB (
@@ -31,7 +55,13 @@ CREATE TABLE FIDE_DISTRITO_TB (
     id_canton INT NOT NULL,
     nombre_distrito VARCHAR2(100) NOT NULL,
     CONSTRAINT fk_distrito_canton FOREIGN KEY (id_canton) 
-    REFERENCES FIDE_CANTON_TB(id_canton)
+    REFERENCES FIDE_CANTON_TB(id_canton),
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
 
 CREATE TABLE FIDE_DIRECCION_TB (
@@ -48,12 +78,24 @@ CREATE TABLE FIDE_DIRECCION_TB (
     CONSTRAINT fk_direccion_provincia FOREIGN KEY (id_provincia) 
     REFERENCES FIDE_PROVINCIA_TB(id_provincia),
     CONSTRAINT fk_direccion_pais FOREIGN KEY (id_pais) 
-    REFERENCES FIDE_PAIS_TB(id_pais)
+    REFERENCES FIDE_PAIS_TB(id_pais),
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+
 );
 
 CREATE TABLE FIDE_NACIONALIDAD_TB (
     ID_Nacionalidad INT PRIMARY KEY,
-    Descripcion VARCHAR2(50) NOT NULL
+    Descripcion VARCHAR2(50) NOT NULL,
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
 
 CREATE TABLE FIDE_ROLES_TB (
@@ -62,24 +104,48 @@ CREATE TABLE FIDE_ROLES_TB (
     nombre_rol VARCHAR2(50) NOT NULL,
     descripción VARCHAR2(500) NOT NULL,
     CONSTRAINT fk_roles_estado FOREIGN KEY (id_estado) 
-    REFERENCES FIDE_ESTADOS_TB(id_estado)
+    REFERENCES FIDE_ESTADOS_TB(id_estado),
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+
 );
 
 CREATE TABLE FIDE_MONEDA_TB (
     id_moneda INT PRIMARY KEY,
     codigo_moneda VARCHAR2(3) UNIQUE NOT NULL,
-    nombre_moneda VARCHAR2(50) NOT NULL
+    nombre_moneda VARCHAR2(50) NOT NULL,
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
 
 CREATE TABLE FIDE_TIPO_MANTENIMIENTO_TB (
     id_tipo_mantenimiento INT PRIMARY KEY,
-    tipo_mantenimiento VARCHAR2(100) NOT NULL
+    tipo_mantenimiento VARCHAR2(100) NOT NULL,
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
 
 CREATE TABLE FIDE_TIPO_PROMOCION_TB (
     id_tipo_promocion INT PRIMARY KEY,
     nombre VARCHAR2(50) NOT NULL,
-    descripcion VARCHAR2(255) NOT NULL
+    descripcion VARCHAR2(255) NOT NULL,
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
 
 CREATE TABLE FIDE_USUARIOS_TB (
@@ -102,7 +168,13 @@ CREATE TABLE FIDE_USUARIOS_TB (
     CONSTRAINT fk_usuarios_nacionalidad FOREIGN KEY (id_nacionalidad) 
     REFERENCES FIDE_NACIONALIDAD_TB(ID_Nacionalidad),
     CONSTRAINT fk_usuarios_direccion FOREIGN KEY (id_direccion) 
-    REFERENCES FIDE_DIRECCION_TB(id_direccion)
+    REFERENCES FIDE_DIRECCION_TB(id_direccion),
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
 
 CREATE TABLE FIDE_HOTELES_TB (
@@ -112,7 +184,13 @@ CREATE TABLE FIDE_HOTELES_TB (
     ubicacion VARCHAR2(255) NOT NULL,
     telefono VARCHAR2(20) NOT NULL,
     CONSTRAINT fk_hoteles_estado FOREIGN KEY (id_estado) 
-    REFERENCES FIDE_ESTADOS_TB(id_estado)
+    REFERENCES FIDE_ESTADOS_TB(id_estado),
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
 
 CREATE TABLE FIDE_HABITACIONES_TB (
@@ -130,7 +208,13 @@ CREATE TABLE FIDE_HABITACIONES_TB (
     CONSTRAINT fk_habitaciones_moneda FOREIGN KEY (id_moneda) 
     REFERENCES FIDE_MONEDA_TB(id_moneda),
     CONSTRAINT fk_habitaciones_estado FOREIGN KEY (id_estado) 
-    REFERENCES FIDE_ESTADOS_TB(id_estado)
+    REFERENCES FIDE_ESTADOS_TB(id_estado),
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
 
 CREATE TABLE FIDE_VALORACION_TB (
@@ -140,7 +224,13 @@ CREATE TABLE FIDE_VALORACION_TB (
     valoracion INT NOT NULL,
     timestamp TIMESTAMP NOT NULL,
     CONSTRAINT fk_valoracion_estado FOREIGN KEY (id_estado) 
-    REFERENCES FIDE_ESTADOS_TB(id_estado)
+    REFERENCES FIDE_ESTADOS_TB(id_estado),
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
 
 CREATE TABLE FIDE_CATEGORIA_RESERVAS_TB (
@@ -149,7 +239,13 @@ CREATE TABLE FIDE_CATEGORIA_RESERVAS_TB (
     nombre_categoria VARCHAR2(100) NOT NULL,
     comentarios VARCHAR2(250) NOT NULL,
     CONSTRAINT fk_categoria_estado FOREIGN KEY (id_estado) 
-    REFERENCES FIDE_ESTADOS_TB(id_estado)
+    REFERENCES FIDE_ESTADOS_TB(id_estado),
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
 
 CREATE TABLE FIDE_RESERVAS_TB (
@@ -180,7 +276,13 @@ CREATE TABLE FIDE_RESERVAS_TB (
     CONSTRAINT fk_reservas_moneda FOREIGN KEY (id_moneda) 
     REFERENCES FIDE_MONEDA_TB(id_moneda),
     CONSTRAINT fk_reservas_estado FOREIGN KEY (id_estado) 
-    REFERENCES FIDE_ESTADOS_TB(id_estado)
+    REFERENCES FIDE_ESTADOS_TB(id_estado),
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
 
 CREATE TABLE FIDE_PROMOCIONES_TB (
@@ -202,7 +304,13 @@ CREATE TABLE FIDE_PROMOCIONES_TB (
     CONSTRAINT fk_promociones_moneda FOREIGN KEY (id_moneda) 
     REFERENCES FIDE_MONEDA_TB(id_moneda),
     CONSTRAINT fk_promociones_estado FOREIGN KEY (id_estado) 
-    REFERENCES FIDE_ESTADOS_TB(id_estado)
+    REFERENCES FIDE_ESTADOS_TB(id_estado),
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
 
 CREATE TABLE FIDE_IMPUESTOS_TB (
@@ -214,7 +322,13 @@ CREATE TABLE FIDE_IMPUESTOS_TB (
     CONSTRAINT fk_impuestos_pais FOREIGN KEY (id_pais) 
     REFERENCES FIDE_PAIS_TB(id_pais),
     CONSTRAINT fk_impuestos_estado FOREIGN KEY (id_estado) 
-    REFERENCES FIDE_ESTADOS_TB(id_estado)
+    REFERENCES FIDE_ESTADOS_TB(id_estado),
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
 
 CREATE TABLE FIDE_FACTURAS_TB (
@@ -235,7 +349,13 @@ CREATE TABLE FIDE_FACTURAS_TB (
     CONSTRAINT fk_facturas_promocion FOREIGN KEY (id_promocion) 
     REFERENCES FIDE_PROMOCIONES_TB(id_promocion),
     CONSTRAINT fk_facturas_estado FOREIGN KEY (id_estado) 
-    REFERENCES FIDE_ESTADOS_TB(id_estado)
+    REFERENCES FIDE_ESTADOS_TB(id_estado),
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
 
 CREATE TABLE FIDE_DETALLE_FACTURA_TB (
@@ -256,7 +376,13 @@ CREATE TABLE FIDE_DETALLE_FACTURA_TB (
     CONSTRAINT fk_detalle_moneda FOREIGN KEY (id_moneda) 
     REFERENCES FIDE_MONEDA_TB(id_moneda),
     CONSTRAINT fk_detalle_estado FOREIGN KEY (id_estado) 
-    REFERENCES FIDE_ESTADOS_TB(id_estado)
+    REFERENCES FIDE_ESTADOS_TB(id_estado),
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
 
 CREATE TABLE FIDE_RESERVAS_FACTURA_TB (
@@ -266,7 +392,13 @@ CREATE TABLE FIDE_RESERVAS_FACTURA_TB (
     CONSTRAINT fk_res_fact_factura FOREIGN KEY (id_factura) 
     REFERENCES FIDE_FACTURAS_TB(id_factura),
     CONSTRAINT fk_res_fact_reservacion FOREIGN KEY (id_reservacion) 
-    REFERENCES FIDE_RESERVAS_TB(id_reservacion)
+    REFERENCES FIDE_RESERVAS_TB(id_reservacion),
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
 
 CREATE TABLE FIDE_TIPO_CAMBIO_TB (
@@ -275,7 +407,14 @@ CREATE TABLE FIDE_TIPO_CAMBIO_TB (
     fecha DATE NOT NULL,
     tasa_cambio DECIMAL(20,2) NOT NULL,
     CONSTRAINT fk_tipo_cambio_moneda FOREIGN KEY (id_moneda) 
-    REFERENCES FIDE_MONEDA_TB(id_moneda)
+    REFERENCES FIDE_MONEDA_TB(id_moneda),
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
+    
 );
 
 CREATE TABLE FIDE_MANTENIMIENTO_TB (
@@ -289,7 +428,13 @@ CREATE TABLE FIDE_MANTENIMIENTO_TB (
     CONSTRAINT fk_mantenimiento_estado FOREIGN KEY (id_estado) 
     REFERENCES FIDE_ESTADOS_TB(id_estado),
     CONSTRAINT fk_mantenimiento_tipo FOREIGN KEY (id_tipo_mantenimiento) 
-    REFERENCES FIDE_TIPO_MANTENIMIENTO_TB(id_tipo_mantenimiento)
+    REFERENCES FIDE_TIPO_MANTENIMIENTO_TB(id_tipo_mantenimiento),
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
 
 CREATE TABLE FIDE_LIMPIEZA_HABITACIONES_TB (
@@ -304,5 +449,42 @@ CREATE TABLE FIDE_LIMPIEZA_HABITACIONES_TB (
     CONSTRAINT fk_limpieza_usuario FOREIGN KEY (id_usuario) 
     REFERENCES FIDE_USUARIOS_TB(id_usuario),
     CONSTRAINT fk_limpieza_estado FOREIGN KEY (id_estado) 
-    REFERENCES FIDE_ESTADOS_TB(id_estado)
+    REFERENCES FIDE_ESTADOS_TB(id_estado),
+    creado_por VARCHAR2(100),
+    fecha_creacion TIMESTAMP,
+    modificado_por VARCHAR2(100),
+    fecha_modificacion TIMESTAMP,
+    accion varchar2(100)
+    
 );
+
+
+
+ FIDE_LIMPIEZA_HABITACIONES_TB;
+ FIDE_MANTENIMIENTO_TB;
+ FIDE_DETALLE_FACTURA_TB;
+ FIDE_RESERVAS_FACTURA_TB;
+ FIDE_FACTURAS_TB;
+ FIDE_PROMOCIONES_TB;
+ FIDE_RESERVAS_TB;
+ FIDE_CATEGORIA_RESERVAS_TB;
+ FIDE_VALORACION_TB;
+ FIDE_HABITACIONES_TB;
+ FIDE_HOTELES_TB;
+ FIDE_USUARIOS_TB;
+ FIDE_TIPO_MANTENIMIENTO_TB;
+ FIDE_TIPO_CAMBIO_TB;
+ FIDE_MONEDA_TB;
+ FIDE_IMPUESTOS_TB;
+ FIDE_TIPO_PROMOCION_TB;
+ FIDE_DIRECCION_TB;
+ FIDE_DISTRITO_TB;
+ FIDE_CANTON_TB;
+ FIDE_PROVINCIA_TB;
+ FIDE_PAIS_TB;
+ FIDE_NACIONALIDAD_TB;
+ FIDE_ROLES_TB;
+ FIDE_ESTADOS_TB;
+
+
+
