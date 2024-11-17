@@ -375,11 +375,11 @@ declare
 begin
     v_resultado := usuarios_pkg.crear_usuario(
         p_nombre => 'richie',
-        p_apellidos => 'pérez',
+        p_apellidos => 'ulate',
         p_cedula => '123456789',
-        p_telefono => '888-1234',
-        p_correo => 'juan.perez@ejemplo.com',
-        p_contrasena => 'contraseña123',
+        p_telefono => '8881234',
+        p_correo => 'richie.ulate@gmail.com',
+        p_contrasena => '123',
         p_fecha_nacimiento => to_date('1990-01-01', 'yyyy-mm-dd'),
         p_id_rol => 1,
         p_id_nacionalidad => 1,
@@ -390,3 +390,4 @@ end;
 
 
 
+    
