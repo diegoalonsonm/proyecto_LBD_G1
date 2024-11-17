@@ -309,6 +309,9 @@ CREATE TABLE FIDE_LIMPIEZA_HABITACIONES_TB (
 );
 
 
+
+
+
 --creacion de paquete de usuarios y body
 
 
@@ -317,6 +320,20 @@ start with 1
 increment by 1
 nocache
 nocycle;
+
+-- Secuencia para generar ID de reservaciones
+CREATE SEQUENCE seq_id_reservacion
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+
+-- Secuencia para generar ID de facturas
+CREATE SEQUENCE seq_id_factura
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
 
 create or replace package usuarios_pkg as
 
@@ -369,6 +386,7 @@ select object_name, object_type
 from all_objects
 where object_name = 'USUARIOS_PKG';
 
+
 set serveroutput on;
 declare
     v_resultado varchar2(400);
@@ -390,4 +408,245 @@ end;
 
 
 
-    
+
+
+
+--FUNCIONES Y PAQUETES
+
+
+CREATE OR REPLACE PACKAGE reservas_pkg AS
+    FUNCTION crear_reserva (
+        p_id_usuario INT,
+        p_id_hotel INT,
+        p_id_categoria INT,
+        p_id_habitacion INT,
+        p_id_moneda INT,
+        p_fecha_inicio DATE,
+        p_fecha_cierre DATE,
+        p_precio_unitario NUMBER,
+        p_hora TIMESTAMP 
+    ) RETURN VARCHAR2;
+
+    FUNCTION cancelar_reserva (
+        p_id_reservacion INT
+    ) RETURN VARCHAR2;
+END reservas_pkg;
+/
+
+CREATE OR REPLACE PACKAGE BODY reservas_pkg AS
+    FUNCTION crear_reserva (
+        p_id_usuario INT,
+        p_id_hotel INT,
+        p_id_categoria INT,
+        p_id_habitacion INT,
+        p_id_moneda INT,
+        p_fecha_inicio DATE,
+        p_fecha_cierre DATE,
+        p_precio_unitario NUMBER,
+        p_hora TIMESTAMP 
+    ) RETURN VARCHAR2 IS
+    BEGIN
+        INSERT INTO fide_reservas_tb (id_reservacion, id_usuario, id_hotel, id_categoria, id_habitacion, id_moneda, id_estado, fecha_inicio, fecha_cierre, precio_unitario, nombre, descripcion, hora)
+        VALUES (seq_id_reservacion.NEXTVAL, p_id_usuario, p_id_hotel, p_id_categoria, p_id_habitacion, p_id_moneda, 1, p_fecha_inicio, p_fecha_cierre, p_precio_unitario, 'Reservación nueva', 'Descripción de la reservación', p_hora);
+        
+        RETURN 'Reserva creada exitosamente';
+    EXCEPTION
+        WHEN OTHERS THEN
+            RETURN 'Error al crear la reserva: ' || SQLERRM;
+    END;
+
+    FUNCTION cancelar_reserva (
+        p_id_reservacion INT
+    ) RETURN VARCHAR2 IS
+    BEGIN
+        UPDATE fide_reservas_tb
+        SET id_estado = 2 
+        WHERE id_reservacion = p_id_reservacion;
+
+        RETURN 'Reserva cancelada exitosamente';
+    EXCEPTION
+        WHEN OTHERS THEN
+            RETURN 'Error al cancelar la reserva: ' || SQLERRM;
+    END;
+END reservas_pkg;
+/
+
+
+CREATE OR REPLACE PACKAGE facturacion_pkg AS
+    FUNCTION crear_factura (
+        p_id_usuario INT,
+        p_id_moneda INT,
+        p_id_impuesto INT,
+        p_subtotal NUMBER
+    ) RETURN VARCHAR2;
+
+    FUNCTION calcular_total (
+        p_subtotal NUMBER,
+        p_descuento NUMBER,
+        p_impuesto NUMBER
+    ) RETURN NUMBER;
+END facturacion_pkg;
+/
+
+
+CREATE OR REPLACE PACKAGE BODY facturacion_pkg AS
+    FUNCTION crear_factura (
+        p_id_usuario INT,
+        p_id_moneda INT,
+        p_id_impuesto INT, -- Parámetro para id_impuesto
+        p_subtotal NUMBER
+    ) RETURN VARCHAR2 IS
+        v_total NUMBER;
+    BEGIN
+       
+        v_total := calcular_total(p_subtotal, 0, 13);
+      
+        INSERT INTO fide_facturas_tb (id_factura, id_usuario, id_moneda, id_impuesto, id_estado, subtotal, total)
+        VALUES (seq_id_factura.NEXTVAL, p_id_usuario, p_id_moneda, p_id_impuesto, 1, p_subtotal, v_total);
+
+        RETURN 'Factura creada exitosamente';
+    EXCEPTION
+        WHEN OTHERS THEN
+            RETURN 'Error al crear la factura: ' || SQLERRM;
+    END;
+
+    FUNCTION calcular_total (
+        p_subtotal NUMBER,
+        p_descuento NUMBER,
+        p_impuesto NUMBER
+    ) RETURN NUMBER IS
+    BEGIN
+        RETURN (p_subtotal - p_descuento) * (1 + p_impuesto / 100);
+    END;
+END facturacion_pkg;
+/
+
+
+
+CREATE OR REPLACE PACKAGE habitaciones_pkg AS
+    FUNCTION asignar_habitacion (
+        p_id_reservacion INT,
+        p_id_habitacion INT
+    ) RETURN VARCHAR2;
+
+    FUNCTION verificar_disponibilidad (
+        p_id_habitacion INT,
+        p_fecha_inicio DATE,
+        p_fecha_fin DATE
+    ) RETURN VARCHAR2;
+END habitaciones_pkg;
+/
+
+CREATE OR REPLACE PACKAGE BODY habitaciones_pkg AS
+    FUNCTION asignar_habitacion (
+        p_id_reservacion INT,
+        p_id_habitacion INT
+    ) RETURN VARCHAR2 IS
+    BEGIN
+        UPDATE fide_reservas_tb
+        SET id_habitacion = p_id_habitacion
+        WHERE id_reservacion = p_id_reservacion;
+
+        RETURN 'Habitación asignada exitosamente';
+    EXCEPTION
+        WHEN OTHERS THEN
+            RETURN 'Error al asignar habitación: ' || SQLERRM;
+    END;
+
+    FUNCTION verificar_disponibilidad (
+        p_id_habitacion INT,
+        p_fecha_inicio DATE,
+        p_fecha_fin DATE
+    ) RETURN VARCHAR2 IS
+        v_count INT;
+    BEGIN
+        SELECT COUNT(*)
+        INTO v_count
+        FROM fide_reservas_tb
+        WHERE id_habitacion = p_id_habitacion
+        AND (fecha_inicio <= p_fecha_fin AND fecha_cierre >= p_fecha_inicio);
+
+        IF v_count > 0 THEN
+            RETURN 'Habitación no disponible';
+        ELSE
+            RETURN 'Habitación disponible';
+        END IF;
+    EXCEPTION
+        WHEN OTHERS THEN
+            RETURN 'Error al verificar disponibilidad: ' || SQLERRM;
+    END;
+END habitaciones_pkg;
+/
+
+
+-- PROBANDO CADA FUNCION
+
+DECLARE
+    v_resultado VARCHAR2(400);
+BEGIN
+    v_resultado := facturacion_pkg.crear_factura(
+        p_id_usuario => 1,
+        p_id_moneda => 1,
+        p_id_impuesto => 1, 
+        p_subtotal => 100.00
+    );
+    DBMS_OUTPUT.PUT_LINE(v_resultado);
+END;
+/
+
+
+
+DECLARE
+    v_resultado VARCHAR2(400);
+BEGIN
+
+    v_resultado := reservas_pkg.crear_reserva(
+        p_id_usuario => 3,
+        p_id_hotel => 1,
+        p_id_categoria => 1,
+        p_id_habitacion => 1,
+        p_id_moneda => 1,
+        p_fecha_inicio => TO_DATE('2024-12-01', 'YYYY-MM-DD'),
+        p_fecha_cierre => TO_DATE('2024-12-10', 'YYYY-MM-DD'),
+        p_precio_unitario => 150.00,
+        p_hora => SYSTIMESTAMP -- Asignar la hora actual
+    );
+    DBMS_OUTPUT.PUT_LINE('Resultado de crear reserva: ' || v_resultado);
+END;
+/
+
+DECLARE
+    v_resultado VARCHAR2(400);
+BEGIN
+
+    v_resultado := reservas_pkg.cancelar_reserva(10);
+    DBMS_OUTPUT.PUT_LINE('Resultado de cancelar reserva: ' || v_resultado);
+END;
+/
+
+
+DECLARE
+    v_resultado VARCHAR2(400);
+BEGIN
+
+    v_resultado := habitaciones_pkg.verificar_disponibilidad(
+        p_id_habitacion => 5,
+        p_fecha_inicio => TO_DATE('2024-11-05', 'YYYY-MM-DD'),
+        p_fecha_fin => TO_DATE('2024-11-10', 'YYYY-MM-DD')
+    );
+    DBMS_OUTPUT.PUT_LINE('Disponibilidad de la habitación: ' || v_resultado);
+
+
+    v_resultado := habitaciones_pkg.asignar_habitacion(
+        p_id_reservacion => 5,
+        p_id_habitacion => 5
+    );
+    DBMS_OUTPUT.PUT_LINE('Resultado de asignación de habitación: ' || v_resultado);
+END;
+/
+
+
+
+
+
+
