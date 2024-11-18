@@ -308,6 +308,290 @@ CREATE TABLE FIDE_LIMPIEZA_HABITACIONES_TB (
     REFERENCES FIDE_ESTADOS_TB(id_estado)
 );
 
+ALTER TABLE FIDE_CANTON_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+ALTER TABLE FIDE_CATEGORIA_RESERVAS_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+ALTER TABLE FIDE_DETALLE_FACTURA_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+ALTER TABLE FIDE_DIRECCION_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+------
+ALTER TABLE FIDE_ESTADOS_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+
+
+ALTER TABLE FIDE_FACTURAS_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+
+ALTER TABLE FIDE_HABITACIONES_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100)
+    
+);
+
+
+ALTER TABLE FIDE_HOTELES_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+
+ALTER TABLE FIDE_IMPUESTOS_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+
+ALTER TABLE FIDE_LIMPIEZA_HABITACIONES_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+
+ALTER TABLE FIDE_MANTENIMIENTO_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+
+ALTER TABLE FIDE_MONEDA_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+
+ALTER TABLE FIDE_NACIONALIDAD_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+
+ALTER TABLE FIDE_PAIS_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+
+ALTER TABLE FIDE_PROMOCIONES_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+
+ALTER TABLE FIDE_PROVINCIA_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+
+ALTER TABLE FIDE_RESERVAS_FACTURA_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+
+ALTER TABLE FIDE_RESERVAS_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+
+ALTER TABLE FIDE_ROLES_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+
+ALTER TABLE FIDE_TIPO_CAMBIO_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+
+ALTER TABLE FIDE_TIPO_MANTENIMIENTO_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+
+ALTER TABLE FIDE_TIPO_PROMOCION_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+
+ALTER TABLE FIDE_USUARIOS_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+ALTER TABLE FIDE_VALORACION_TB
+ADD (
+    NOMBRE VARCHAR2(100),
+    CREADO_POR VARCHAR2(100),
+    FECHA_CREACION TIMESTAMP,
+    MODIFICADO_POR VARCHAR2(100),
+    FECHA_MODIFICACION TIMESTAMP,
+    ACCION VARCHAR2(100),
+    ESTADO VARCHAR2(1)
+);
+
+
 
 
 
@@ -334,6 +618,40 @@ START WITH 1
 INCREMENT BY 1
 NOCACHE
 NOCYCLE;
+
+-- Secuencia para generar ID de roles
+CREATE SEQUENCE seq_id_rol
+START WITH 6
+INCREMENT BY 1
+NOCACHE;
+
+-- Secuencia para generar ID de hoteles
+
+CREATE SEQUENCE seq_id_hotel
+START WITH 6
+INCREMENT BY 1
+NOCACHE;
+
+
+
+-- Secuencia para generar ID de direcciones
+
+CREATE SEQUENCE seq_id_direccion
+START WITH 6
+INCREMENT BY 1
+NOCACHE;
+
+-- Secuencia para generar ID de pais
+CREATE SEQUENCE seq_id_pais
+START WITH 6
+INCREMENT BY 1
+NOCACHE;
+
+
+
+
+
+--FUNCIONES Y PAQUETES
 
 create or replace package usuarios_pkg as
 
@@ -381,38 +699,6 @@ end;
 
 end usuarios_pkg;
 /
-
-select object_name, object_type
-from all_objects
-where object_name = 'USUARIOS_PKG';
-
-
-set serveroutput on;
-declare
-    v_resultado varchar2(400);
-begin
-    v_resultado := usuarios_pkg.crear_usuario(
-        p_nombre => 'richie',
-        p_apellidos => 'ulate',
-        p_cedula => '123456789',
-        p_telefono => '8881234',
-        p_correo => 'richie.ulate@gmail.com',
-        p_contrasena => '123',
-        p_fecha_nacimiento => to_date('1990-01-01', 'yyyy-mm-dd'),
-        p_id_rol => 1,
-        p_id_nacionalidad => 1,
-        p_id_direccion => 1
-    );
-    dbms_output.put_line(v_resultado);
-end;
-
-
-
-
-
-
---FUNCIONES Y PAQUETES
-
 
 CREATE OR REPLACE PACKAGE reservas_pkg AS
     FUNCTION crear_reserva (
@@ -493,7 +779,7 @@ CREATE OR REPLACE PACKAGE BODY facturacion_pkg AS
     FUNCTION crear_factura (
         p_id_usuario INT,
         p_id_moneda INT,
-        p_id_impuesto INT, -- Parámetro para id_impuesto
+        p_id_impuesto INT, 
         p_subtotal NUMBER
     ) RETURN VARCHAR2 IS
         v_total NUMBER;
@@ -578,8 +864,146 @@ CREATE OR REPLACE PACKAGE BODY habitaciones_pkg AS
 END habitaciones_pkg;
 /
 
+CREATE OR REPLACE PACKAGE roles_crear_pkg AS
+    FUNCTION crear_rol (
+        p_nombre_rol VARCHAR2,
+        p_descripcion VARCHAR2,
+        p_id_estado INT,
+        p_creado_por VARCHAR2
+    ) RETURN VARCHAR2;
+END roles_crear_pkg;
+/
+
+CREATE OR REPLACE PACKAGE BODY roles_crear_pkg AS
+    FUNCTION crear_rol (
+        p_nombre_rol VARCHAR2,
+        p_descripcion VARCHAR2,
+        p_id_estado INT,
+        p_creado_por VARCHAR2
+    ) RETURN VARCHAR2 IS
+    BEGIN
+        INSERT INTO fide_roles_tb (id_rol, id_estado, nombre_rol, descripcion, creado_por, fecha_creacion)
+        VALUES (seq_id_rol.NEXTVAL, p_id_estado, p_nombre_rol, p_descripcion, p_creado_por, SYSTIMESTAMP);
+        RETURN 'Rol creado exitosamente';
+    EXCEPTION
+        WHEN OTHERS THEN
+            RETURN 'Error al crear rol: ' || SQLERRM;
+    END;
+END roles_crear_pkg;
+/
+
+CREATE OR REPLACE PACKAGE hoteles_crear_pkg AS
+    FUNCTION crear_hotel (
+        p_nombre_hotel VARCHAR2,
+        p_ubicacion VARCHAR2,
+        p_telefono VARCHAR2,
+        p_id_estado INT,
+        p_creado_por VARCHAR2
+    ) RETURN VARCHAR2;
+END hoteles_crear_pkg;
+/
+
+CREATE OR REPLACE PACKAGE BODY hoteles_crear_pkg AS
+    FUNCTION crear_hotel (
+        p_nombre_hotel VARCHAR2,
+        p_ubicacion VARCHAR2,
+        p_telefono VARCHAR2,
+        p_id_estado INT,
+        p_creado_por VARCHAR2
+    ) RETURN VARCHAR2 IS
+    BEGIN
+        INSERT INTO fide_hoteles_tb (id_hotel, id_estado, nombre_hotel, ubicacion, telefono, creado_por, fecha_creacion)
+        VALUES (seq_id_hotel.NEXTVAL, p_id_estado, p_nombre_hotel, p_ubicacion, p_telefono, p_creado_por, SYSTIMESTAMP);
+        RETURN 'Hotel creado exitosamente';
+    EXCEPTION
+        WHEN OTHERS THEN
+            RETURN 'Error al crear hotel: ' || SQLERRM;
+    END;
+END hoteles_crear_pkg;
+/
+
+CREATE OR REPLACE PACKAGE direccion_crear_pkg AS
+    FUNCTION crear_direccion (
+        p_id_distrito INT,
+        p_id_canton INT,
+        p_id_provincia INT,
+        p_id_pais INT,
+        p_descripcion VARCHAR2,
+        p_creado_por VARCHAR2
+    ) RETURN VARCHAR2;
+END direccion_crear_pkg;
+/
+
+CREATE OR REPLACE PACKAGE BODY direccion_crear_pkg AS
+    FUNCTION crear_direccion (
+        p_id_distrito INT,
+        p_id_canton INT,
+        p_id_provincia INT,
+        p_id_pais INT,
+        p_descripcion VARCHAR2,
+        p_creado_por VARCHAR2
+    ) RETURN VARCHAR2 IS
+    BEGIN
+        INSERT INTO fide_direccion_tb (id_direccion, id_distrito, id_canton, id_provincia, id_pais, descripcion, creado_por, fecha_creacion)
+        VALUES (seq_id_direccion.NEXTVAL, p_id_distrito, p_id_canton, p_id_provincia, p_id_pais, p_descripcion, p_creado_por, SYSTIMESTAMP);
+        RETURN 'Dirección creada exitosamente';
+    EXCEPTION
+        WHEN OTHERS THEN
+            RETURN 'Error al crear dirección: ' || SQLERRM;
+    END;
+END direccion_crear_pkg;
+/
+
+
+CREATE OR REPLACE PACKAGE pais_crear_pkg AS
+    FUNCTION crear_pais (
+        p_nombre_pais VARCHAR2,
+        p_creado_por VARCHAR2
+    ) RETURN VARCHAR2;
+END pais_crear_pkg;
+/
+
+CREATE OR REPLACE PACKAGE BODY pais_crear_pkg AS
+    FUNCTION crear_pais (
+        p_nombre_pais VARCHAR2,
+        p_creado_por VARCHAR2
+    ) RETURN VARCHAR2 IS
+    BEGIN
+        INSERT INTO fide_pais_tb (id_pais, nombre_pais, nombre, creado_por, fecha_creacion, estado)
+        VALUES (seq_id_pais.NEXTVAL, p_nombre_pais, p_nombre_pais, p_creado_por, SYSTIMESTAMP, 'A');
+        
+        RETURN 'País creado exitosamente';
+    EXCEPTION
+        WHEN OTHERS THEN
+            RETURN 'Error al crear país: ' || SQLERRM;
+    END;
+END pais_crear_pkg;
+/
+
+
+
+
 
 -- PROBANDO CADA FUNCION
+
+set serveroutput on;
+declare
+    v_resultado varchar2(400);
+begin
+    v_resultado := usuarios_pkg.crear_usuario(
+        p_nombre => 'richie',
+        p_apellidos => 'ulate',
+        p_cedula => '123456789',
+        p_telefono => '8881234',
+        p_correo => 'richie.ulate@gmail.com',
+        p_contrasena => '123',
+        p_fecha_nacimiento => to_date('1990-01-01', 'yyyy-mm-dd'),
+        p_id_rol => 1,
+        p_id_nacionalidad => 1,
+        p_id_direccion => 1
+    );
+    dbms_output.put_line(v_resultado);
+end;
 
 DECLARE
     v_resultado VARCHAR2(400);
@@ -609,7 +1033,7 @@ BEGIN
         p_fecha_inicio => TO_DATE('2024-12-01', 'YYYY-MM-DD'),
         p_fecha_cierre => TO_DATE('2024-12-10', 'YYYY-MM-DD'),
         p_precio_unitario => 150.00,
-        p_hora => SYSTIMESTAMP -- Asignar la hora actual
+        p_hora => SYSTIMESTAMP
     );
     DBMS_OUTPUT.PUT_LINE('Resultado de crear reserva: ' || v_resultado);
 END;
@@ -644,6 +1068,64 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Resultado de asignación de habitación: ' || v_resultado);
 END;
 /
+
+DECLARE
+    v_resultado VARCHAR2(400);
+BEGIN
+    v_resultado := roles_crear_pkg.crear_rol(
+        p_nombre_rol => 'Administrador',
+        p_descripcion => 'Rol con todos los permisos',
+        p_id_estado => 1,
+        p_creado_por => user
+    );
+    DBMS_OUTPUT.PUT_LINE('Resultado de crear rol: ' || v_resultado);
+END;
+/
+
+
+DECLARE
+    v_resultado VARCHAR2(400);
+BEGIN
+    v_resultado := hoteles_crear_pkg.crear_hotel(
+        p_nombre_hotel => 'Hotel Central',
+        p_ubicacion => 'Av. Principal 123',
+        p_telefono => '123456789',
+        p_id_estado => 1,
+        p_creado_por => user
+    );
+    DBMS_OUTPUT.PUT_LINE('Resultado de crear hotel: ' || v_resultado);
+END;
+/
+
+DECLARE
+    v_resultado VARCHAR2(400);
+BEGIN
+    v_resultado := direccion_crear_pkg.crear_direccion(
+        p_id_distrito => 1,
+        p_id_canton => 2,
+        p_id_provincia => 3,
+        p_id_pais => 4,
+        p_descripcion => 'Descripción de la dirección',
+        p_creado_por => user
+    );
+    DBMS_OUTPUT.PUT_LINE('Resultado de crear dirección: ' || v_resultado);
+END;
+/
+
+DECLARE
+    v_resultado VARCHAR2(400);
+BEGIN
+    v_resultado := pais_crear_pkg.crear_pais(
+        p_nombre_pais => 'Honduras',
+        p_creado_por => user
+    );
+    DBMS_OUTPUT.PUT_LINE('Resultado de crear país: ' || v_resultado);
+END;
+/
+
+
+
+
 
 
 
