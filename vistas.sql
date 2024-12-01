@@ -132,3 +132,265 @@ FROM FIDE_RESERVAS_TB r, FIDE_USUARIOS_TB u, FIDE_HOTELES_TB h
 WHERE r.id_estado = 2
   AND r.id_usuario = u.id_usuario
   AND r.id_hotel = h.id_hotel;
+
+
+
+  CREATE OR REPLACE VIEW FIDE_ESTADOS_V AS
+SELECT 
+    nombre_estado,
+    descripcion,
+    notas
+FROM 
+    FIDE_ESTADOS_TB
+WHERE 
+    id_estado = 1;
+
+CREATE OR REPLACE VIEW FIDE_PAIS_V AS
+SELECT 
+    id_pais,
+    nombre_pais
+FROM 
+    FIDE_PAIS_TB;
+
+CREATE OR REPLACE VIEW FIDE_PROVINCIA_V AS
+SELECT 
+    id_provincia,
+    id_pais,
+    nombre_provincia
+FROM 
+    FIDE_PROVINCIA_TB;
+
+CREATE OR REPLACE VIEW FIDE_CANTON_V AS
+SELECT 
+    id_canton,
+    id_provincia,
+    nombre_canton
+FROM 
+    FIDE_CANTON_TB;
+
+CREATE OR REPLACE VIEW FIDE_DISTRITO_V AS
+SELECT 
+    id_distrito,
+    id_canton,
+    nombre_distrito
+FROM 
+    FIDE_DISTRITO_TB;
+
+CREATE OR REPLACE VIEW FIDE_DIRECCION_V AS
+SELECT 
+    id_direccion,
+    id_distrito,
+    id_canton,
+    id_provincia,
+    id_pais,
+    descripcion
+FROM 
+    FIDE_DIRECCION_TB;
+
+CREATE OR REPLACE VIEW FIDE_NACIONALIDAD_V AS
+SELECT 
+    ID_Nacionalidad,
+    Descripcion
+FROM 
+    FIDE_NACIONALIDAD_TB;
+
+CREATE OR REPLACE VIEW FIDE_ROLES_V AS
+SELECT 
+    id_rol,
+    nombre_rol,
+    descripcion
+FROM 
+    FIDE_ROLES_TB
+WHERE 
+    id_estado = 1;
+
+CREATE OR REPLACE VIEW FIDE_MONEDA_V AS
+SELECT 
+    id_moneda,
+    codigo_moneda,
+    nombre_moneda
+FROM 
+    FIDE_MONEDA_TB;
+
+CREATE OR REPLACE VIEW FIDE_TIPO_MANTENIMIENTO_V AS
+SELECT 
+    id_tipo_mantenimiento,
+    tipo_mantenimiento
+FROM 
+    FIDE_TIPO_MANTENIMIENTO_TB;
+
+CREATE OR REPLACE VIEW FIDE_TIPO_PROMOCION_V AS
+SELECT 
+    id_tipo_promocion,
+    nombre,
+    descripcion
+FROM 
+    FIDE_TIPO_PROMOCION_TB;
+
+CREATE OR REPLACE VIEW FIDE_USUARIOS_V AS
+SELECT 
+    id_usuario,
+    id_rol,
+    id_nacionalidad,
+    id_direccion,
+    nombre,
+    apellidos,
+    cedula,
+    telefono,
+    correo,
+    contrasena,
+    fecha_nacimiento
+FROM 
+    FIDE_USUARIOS_TB
+WHERE 
+    id_estado = 1;
+
+CREATE OR REPLACE VIEW FIDE_HOTELES_V AS
+SELECT 
+    id_hotel,
+    nombre_hotel,
+    ubicacion,
+    telefono
+FROM 
+    FIDE_HOTELES_TB
+WHERE 
+    id_estado = 1;
+
+CREATE OR REPLACE VIEW FIDE_HABITACIONES_V AS
+SELECT 
+    id_habitacion,
+    id_hotel,
+    id_moneda,
+    numero_habitacion,
+    tipo_habitacion,
+    precio_por_noche,
+    capacidad_personas,
+    estado
+FROM 
+    FIDE_HABITACIONES_TB
+WHERE 
+    id_estado = 1;
+
+CREATE OR REPLACE VIEW FIDE_VALORACION_V AS
+SELECT 
+    id_valoracion,
+    comentario,
+    valoracion,
+    timestamp
+FROM 
+    FIDE_VALORACION_TB
+WHERE 
+    id_estado = 1;
+
+CREATE OR REPLACE VIEW FIDE_CATEGORIA_RESERVAS_V AS
+SELECT 
+    id_categoria,
+    nombre_categoria,
+    comentarios
+FROM 
+    FIDE_CATEGORIA_RESERVAS_TB
+WHERE 
+    id_estado = 1;
+
+CREATE OR REPLACE VIEW FIDE_RESERVAS_V AS
+SELECT 
+    id_reservacion,
+    id_usuario,
+    id_hotel,
+    id_categoria,
+    id_habitacion,
+    id_valoracion,
+    id_moneda,
+    fecha_inicio,
+    fecha_cierre,
+    hora,
+    precio_unitario,
+    nombre,
+    descripcion
+FROM 
+    FIDE_RESERVAS_TB
+WHERE 
+    id_estado = 1;
+
+CREATE OR REPLACE VIEW FIDE_PROMOCIONES_V AS
+SELECT 
+    id_promocion,
+    id_tipo_promocion,
+    id_reservacion,
+    id_moneda,
+    descripcion,
+    nombre_promocion,
+    fecha_inicio,
+    fecha_fin,
+    porcentaje_promocion,
+    descuento
+FROM 
+    FIDE_PROMOCIONES_TB
+WHERE 
+    id_estado = 1;
+
+CREATE OR REPLACE VIEW FIDE_IMPUESTOS_V AS
+SELECT 
+    id_impuesto,
+    id_pais,
+    nombre_impuesto,
+    porcentaje
+FROM 
+    FIDE_IMPUESTOS_TB
+WHERE 
+    id_estado = 1;
+
+CREATE OR REPLACE VIEW FIDE_FACTURAS_V AS
+SELECT 
+    id_factura,
+    id_moneda,
+    id_usuario,
+    id_impuesto,
+    id_promocion,
+    subtotal,
+    total
+FROM 
+    FIDE_FACTURAS_TB
+WHERE 
+    id_estado = 1;
+
+CREATE OR REPLACE VIEW FIDE_DETALLE_FACTURA_V AS
+SELECT 
+    id_detalle_factura,
+    id_factura,
+    id_reservacion,
+    id_promocion,
+    id_moneda,
+    cantidad,
+    total_linea
+FROM 
+    FIDE_DETALLE_FACTURA_TB
+WHERE 
+    id_estado = 1;
+
+CREATE OR REPLACE VIEW FIDE_RESERVAS_FACTURA_V AS
+SELECT 
+    id_factura,
+    id_reservacion
+FROM 
+    FIDE_RESERVAS_FACTURA_TB;
+
+CREATE OR REPLACE VIEW FIDE_TIPO_CAMBIO_V AS
+SELECT 
+    id_tipo_cambio,
+    id_moneda,
+    fecha,
+    tasa_cambio
+FROM 
+    FIDE_TIPO_CAMBIO_TB;
+
+CREATE OR REPLACE VIEW FIDE_MANTENIMIENTO_V AS
+SELECT 
+    id_mantenimiento,
+    id_habitacion,
+    id_tipo_mantenimiento,
+    fecha_mantenimiento
+FROM 
+    FIDE_MANTENIMIENTO_TB
+WHERE 
+    id_estado = 1;

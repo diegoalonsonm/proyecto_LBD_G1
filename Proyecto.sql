@@ -449,7 +449,10 @@ CREATE TABLE FIDE_LIMPIEZA_HABITACIONES_TB (
     REFERENCES FIDE_HABITACIONES_TB(id_habitacion),
     CONSTRAINT fk_limpieza_usuario FOREIGN KEY (id_usuario) 
     REFERENCES FIDE_USUARIOS_TB(id_usuario),
-    CONSTRAINT fk_limpieza_estado FOREIGN KEY (id_estado) 
+    CONSTRAINT fk_limpieza_estado FOREIGN KEY (id_estado)
+    REFERENCES FIDE_ESTADOS_TB(ESTADO_ID)  
+
+    )
 -- Creación de tablas
 CREATE TABLE FIDE_ESTADOS_TB (
     id_estado INT PRIMARY KEY,
